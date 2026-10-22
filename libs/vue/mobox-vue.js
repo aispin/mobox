@@ -1,5 +1,5 @@
 import { Teleport as e, defineComponent as t, h as n, onBeforeUnmount as r, onMounted as i, ref as a, watch as o } from "vue";
-import { Mobox as s } from "@mobox/core";
+import { Mobox as s } from "@aifire/mobox-core";
 //#region src/Mobox.ts
 var c = t({
 	name: "Mobox",

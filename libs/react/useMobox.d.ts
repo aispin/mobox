@@ -1,4 +1,4 @@
-import { type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@mobox/core';
+import { type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@aifire/mobox-core';
 export type UseMoboxOptions = MoboxOptions;
 /**
  * Imperative MOBOX hook. Attach the returned `ref` to any element;

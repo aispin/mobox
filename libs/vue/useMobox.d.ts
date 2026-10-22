@@ -1,4 +1,4 @@
-import { type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@mobox/core';
+import { type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@aifire/mobox-core';
 export type UseMoboxOptions = MoboxOptions;
 /**
  * Imperative MOBOX composable. Bind the returned `el` ref with `ref="el"`

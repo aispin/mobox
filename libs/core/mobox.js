@@ -285,35 +285,55 @@ var l = {
 	"#fbbf24"
 ];
 function _(e, t) {
-	if (o()) return;
-	let n = e.getBoundingClientRect(), r = t.offsetWidth || 560, i = t.offsetHeight || 200, a = t.offsetParent, s = a ? a.getBoundingClientRect() : n, c = a ? s.left + t.offsetLeft : n.left + (n.width - r) / 2, l = a ? s.top + t.offsetTop : n.top + (n.height - i) / 2, u = document.createElement("canvas"), d = Math.min(window.devicePixelRatio || 1, 2);
-	u.width = window.innerWidth * d, u.height = window.innerHeight * d, Object.assign(u.style, {
+	if (o() || !t.isConnected) return;
+	let n = document.createElement("canvas");
+	Object.assign(n.style, {
 		position: "fixed",
-		inset: 0,
-		zIndex: "9998",
+		left: "0",
+		top: "0",
+		width: `${window.innerWidth}px`,
+		height: `${window.innerHeight}px`,
+		zIndex: "1",
 		pointerEvents: "none"
-	}), document.body.appendChild(u);
-	let f = u.getContext("2d");
-	if (!f) {
-		u.remove();
+	}), e.appendChild(n);
+	let r = Math.min(window.devicePixelRatio || 1, 2), i = n.getBoundingClientRect(), a = i.width || window.innerWidth, s = i.height || window.innerHeight;
+	n.width = Math.max(1, Math.round(a * r)), n.height = Math.max(1, Math.round(s * r));
+	let c = n.getContext("2d");
+	if (!c) {
+		n.remove();
 		return;
 	}
-	f.scale(d, d);
-	let p = Array.from({ length: 110 }, () => ({
-		x: c + 16 + Math.random() * Math.max(r - 32, 1),
-		y: l - 2 + Math.random() * 8,
-		vx: Math.cos(-Math.PI / 2 + (Math.random() - .5) * 1.8) * (2 + Math.random() * 5),
-		vy: Math.sin(-Math.PI / 2 + (Math.random() - .5) * 1.8) * (2 + Math.random() * 5),
-		size: 1.5 + Math.random() * 3,
-		color: g[Math.floor(Math.random() * g.length)],
-		life: 1
-	})), m = () => {
-		f.clearRect(0, 0, window.innerWidth, window.innerHeight);
+	c.scale(r, r);
+	let l = t.getBoundingClientRect();
+	if (l.width <= 0) {
+		let e = t.offsetWidth, n = t.offsetHeight;
+		if (e <= 0 || n <= 0 || !t.offsetParent) return;
+		let r = t.offsetParent.getBoundingClientRect();
+		l = {
+			left: r.left + t.offsetLeft,
+			top: r.top + t.offsetTop,
+			width: e,
+			height: n
+		};
+	}
+	let u = l.width || 560, d = l.height || 200, f = l.left + u / 2 - i.left, p = l.top - i.top, m = Math.min(u * .06, 28), h = Math.min(d * .06, 14), _ = Array.from({ length: 120 }, () => {
+		let e = Math.random() * Math.PI * 2, t = 2 + Math.random() * 6;
+		return {
+			x: f + (Math.random() - .5) * 2 * m,
+			y: p + Math.random() * h,
+			vx: Math.cos(e) * t,
+			vy: Math.sin(e) * t,
+			size: 1.5 + Math.random() * 3,
+			color: g[Math.floor(Math.random() * g.length)],
+			life: 1
+		};
+	}), v = () => {
+		c.clearRect(0, 0, a, s);
 		let e = !1;
-		for (let t of p) t.life <= 0 || (e = !0, t.x += t.vx, t.y += t.vy, t.vy += .05, t.vx *= .985, t.vy *= .99, t.life -= .012, f.globalAlpha = Math.max(t.life, 0), f.fillStyle = t.color, f.beginPath(), f.arc(t.x, t.y, t.size, 0, Math.PI * 2), f.fill());
-		e ? requestAnimationFrame(m) : u.remove();
+		for (let t of _) t.life <= 0 || (e = !0, t.x += t.vx, t.y += t.vy, t.vy += .09, t.vx *= .965, t.vy *= .97, t.life -= .014, c.globalAlpha = Math.max(t.life, 0) ** 1.2, c.fillStyle = t.color, c.beginPath(), c.arc(t.x, t.y, t.size * (.45 + .55 * Math.max(t.life, 0)), 0, Math.PI * 2), c.fill());
+		e ? requestAnimationFrame(v) : n.remove();
 	};
-	requestAnimationFrame(m);
+	requestAnimationFrame(v);
 }
 var v = {
 	name: "sparkle",
@@ -329,7 +349,7 @@ var v = {
 			easing: "cubic-bezier(0.22, 1, 0.36, 1)",
 			fill: "both"
 		});
-		return _(e.root, e.inner), t;
+		return window.setTimeout(() => _(e.root, e.inner), 160), t;
 	},
 	exit: ({ inner: e }) => e.animate([{
 		opacity: 1,
@@ -414,29 +434,29 @@ function w() {
 ].forEach(S);
 //#endregion
 //#region src/mobox.ts
-var T = "mobox-open", E = "mobox-scene", D = "mobox-scene-active", O = 0, k = !1;
-function A() {
-	k || (k = !0, document.body.dataset.moboxOverflow = document.body.style.overflow, document.body.style.overflow = "hidden");
-}
+var T = "mobox-open", E = "mobox-scene", D = "mobox-scene-active", O = "<div class=\"mobox\">\n  <div class=\"mobox-overlay\"></div>\n  <div class=\"mobox-inner\">\n    <h2 class=\"mobox-title\"></h2>\n    <div class=\"mobox-cont\" data-content></div>\n    <button class=\"mobox-icon-close\" data-mobox-close aria-label=\"Close\"></button>\n  </div>\n</div>", k = 0, A = !1;
 function j() {
-	k && (k = !1, document.body.style.overflow = document.body.dataset.moboxOverflow ?? "", delete document.body.dataset.moboxOverflow);
+	A || (A = !0, document.body.dataset.moboxOverflow = document.body.style.overflow, document.body.style.overflow = "hidden");
 }
-function M(e) {
-	return e ? typeof e == "string" ? document.getElementById(e) : e : null;
+function M() {
+	A && (A = !1, document.body.style.overflow = document.body.dataset.moboxOverflow ?? "", delete document.body.dataset.moboxOverflow);
 }
 function N(e) {
+	return e ? typeof e == "string" ? document.getElementById(e) : e : null;
+}
+function P(e) {
 	let t = document.createElement("div");
 	t.innerHTML = e.trim();
 	let n = t.firstElementChild;
 	return n ? (document.body.appendChild(n), n) : null;
 }
-function P(e) {
-	if (typeof e != "string") return e instanceof HTMLScriptElement ? N(e.innerHTML) : null;
-	if (e.includes("<")) return N(e);
-	let t = document.getElementById(e);
-	return t ? N(t.innerHTML) : null;
-}
 function F(e) {
+	if (typeof e != "string") return e instanceof HTMLScriptElement ? P(e.innerHTML) : null;
+	if (e.includes("<")) return P(e);
+	let t = document.getElementById(e);
+	return t ? P(t.innerHTML) : null;
+}
+function I(e) {
 	if (e.classList.add("mobox"), !r(".mobox-overlay", e)) {
 		let t = document.createElement("div");
 		t.className = "mobox-overlay", e.prepend(t);
@@ -450,10 +470,10 @@ function F(e) {
 	let t = r(".mobox-inner", e);
 	t && (t.tabIndex = -1);
 }
-var I = class e {
+var L = class e {
 	static create(t = {}, n) {
-		let { el: r, tpl: i, autoShow: a = !0, ...o } = t, s = M(r), c = !s;
-		if (!s && i !== void 0 && (s = P(i)), !s) return console.error("[mobox] Mobox.create() requires a valid \"el\" or \"tpl\" option"), null;
+		let { el: r, tpl: i = O, autoShow: a = !0, ...o } = t, s = N(r), c = !s;
+		if (s ||= F(i), !s) return console.error("[mobox] Mobox.create() requires a valid \"el\" or \"tpl\" option"), null;
 		let l = new e(s, {
 			...o,
 			autoDestroy: o.autoDestroy ?? c
@@ -476,7 +496,7 @@ var I = class e {
 	_isOpen = !1;
 	_cycle = 0;
 	constructor(e, t = {}) {
-		F(e), this.el = e, this.effect = t.effect ?? e.dataset.effect ?? "zoom", this.options = {
+		I(e), this.el = e, this.effect = t.effect ?? e.dataset.effect ?? "zoom", this.options = {
 			closeOnOverlay: !0,
 			closeOnEsc: !0,
 			lockScroll: !0,
@@ -495,7 +515,7 @@ var I = class e {
 	}
 	show(e) {
 		if (e && n(this.el, e, this.options.hideNullValues), this._isOpen) return this;
-		this._isOpen = !0, this.anims.forEach((e) => e.cancel()), this.anims = [], this.options.lockScroll && A(), O++, this.el.classList.add(T), this.options.onOpen?.(this);
+		this._isOpen = !0, this.anims.forEach((e) => e.cancel()), this.anims = [], this.options.lockScroll && j(), k++, this.el.classList.add(T), this.options.onOpen?.(this);
 		let t = ++this._cycle;
 		return this._play("enter").then(() => {
 			t === this._cycle && this._isOpen && this.options.onOpened?.(this);
@@ -506,7 +526,7 @@ var I = class e {
 		this._isOpen = !1, this.options.onClose?.(this);
 		let e = ++this._cycle;
 		return this._play("exit").then(() => {
-			e === this._cycle && (this.el.classList.remove(T), O = Math.max(O - 1, 0), O === 0 && j(), this.options.autoDestroy && this.destroy(), this.options.onClosed?.(this));
+			e === this._cycle && (this.el.classList.remove(T), k = Math.max(k - 1, 0), k === 0 && M(), this.options.autoDestroy && this.destroy(), this.options.onClosed?.(this));
 		}), this;
 	}
 	toggle() {
@@ -518,7 +538,7 @@ var I = class e {
 		return i && (t && n(i, t, this.options.hideNullValues), i.classList.add(D)), this;
 	}
 	dispose() {
-		this.anims.forEach((e) => e.cancel()), this.anims = [], this.teardown.forEach((e) => e()), this.teardown.length = 0, this._isOpen && (this._isOpen = !1, O = Math.max(O - 1, 0), O === 0 && j());
+		this.anims.forEach((e) => e.cancel()), this.anims = [], this.teardown.forEach((e) => e()), this.teardown.length = 0, this._isOpen && (this._isOpen = !1, k = Math.max(k - 1, 0), k === 0 && M());
 	}
 	destroy() {
 		this.dispose(), this.el.remove();
@@ -551,4 +571,4 @@ var I = class e {
 	}
 };
 //#endregion
-export { I as Mobox, w as effectNames, C as getEffect, S as registerEffect };
+export { L as Mobox, w as effectNames, C as getEffect, S as registerEffect };

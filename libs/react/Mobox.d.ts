@@ -1,5 +1,5 @@
 import React, { type ReactNode } from 'react';
-import { type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@mobox/core';
+import { type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@aifire/mobox-core';
 export interface MoboxProps extends Omit<MoboxOptions, 'effect'> {
     /** Effect name. Default: 'zoom' */
     effect?: string;

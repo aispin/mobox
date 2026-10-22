@@ -1,6 +1,6 @@
 import e, { forwardRef as t, useCallback as n, useEffect as r, useImperativeHandle as i, useRef as a, useState as o } from "react";
 import { createPortal as s } from "react-dom";
-import { Mobox as c } from "@mobox/core";
+import { Mobox as c } from "@aifire/mobox-core";
 //#region src/Mobox.tsx
 var l = t(function(t, n) {
 	let { open: l, defaultOpen: u = !1, onOpenChange: d, effect: f = "zoom", children: p, className: m, ...h } = t, g = a(null), _ = a(null), [v, y] = o(u), b = l !== void 0, x = b ? l : v;
