@@ -1,0 +1,22 @@
+{
+  "name": "mobox",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "MOBOX - Modern Dialog + Pop Box + Overlay. Framework-free core with composable effect components, plus React and Vue adapters.",
+  "packageManager": "pnpm@12.14.0",
+  "scripts": {
+    "build": "pnpm -r build",
+    "dev": "pnpm --filter @mobox/landing dev",
+    "preview": "pnpm --filter @mobox/landing preview",
+    "typecheck": "pnpm -r typecheck",
+    "icons": "node scripts/gen-icons.mjs"
+  },
+  "devDependencies": {
+    "sharp": "^0.35.5",
+    "typescript": "catalog:"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

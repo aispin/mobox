@@ -1,0 +1,30 @@
+{
+  "name": "@mobox/core",
+  "version": "2.0.0",
+  "description": "Framework-free dialog / popbox / overlay engine with composable effect components",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/mobox.umd.cjs",
+  "module": "./dist/mobox.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/mobox.js",
+      "require": "./dist/mobox.umd.cjs"
+    },
+    "./mobox.css": "./dist/mobox.css",
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "sideEffects": ["*.css"],
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "devDependencies": {
+    "@types/node": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:"
+  }
+}

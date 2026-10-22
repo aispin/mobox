@@ -1,0 +1,39 @@
+{
+  "name": "@mobox/react",
+  "version": "2.0.0",
+  "description": "React 19 adapter for MOBOX dialogs",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/mobox-react.umd.cjs",
+  "module": "./dist/mobox-react.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/mobox-react.js",
+      "require": "./dist/mobox-react.umd.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@mobox/core": "workspace:*",
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0"
+  },
+  "devDependencies": {
+    "@mobox/core": "workspace:*",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "@vitejs/plugin-react": "catalog:"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@mobox/vue",
+  "version": "2.0.0",
+  "description": "Vue 3 adapter for MOBOX dialogs",
+  "license": "MIT",
+  "type": "module",
+  "main": "./dist/mobox-vue.umd.cjs",
+  "module": "./dist/mobox-vue.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/mobox-vue.js",
+      "require": "./dist/mobox-vue.umd.cjs"
+    },
+    "./package.json": "./package.json"
+  },
+  "files": ["dist"],
+  "sideEffects": false,
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.build.json",
+    "typecheck": "tsc -p tsconfig.json --noEmit"
+  },
+  "peerDependencies": {
+    "@mobox/core": "workspace:*",
+    "vue": "^3.5.0"
+  },
+  "devDependencies": {
+    "@mobox/core": "workspace:*",
+    "typescript": "catalog:",
+    "vite": "catalog:",
+    "@vitejs/plugin-vue": "catalog:",
+    "vue": "catalog:"
+  }
+}

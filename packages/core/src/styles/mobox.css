@@ -1,0 +1,190 @@
+/* MOBOX core styles — framework-free, CSS custom properties for theming */
+.mobox {
+  --mobox-overlay: rgba(9, 9, 18, 0.72);
+  --mobox-surface: #15151f;
+  --mobox-surface-border: rgba(255, 255, 255, 0.08);
+  --mobox-text: #eceaf4;
+  --mobox-radius: 20px;
+  --mobox-pad: clamp(1.4rem, 4vmin, 2.6rem);
+  --mobox-gap: clamp(12px, 4vmin, 48px);
+
+  position: fixed;
+  inset: 0;
+  z-index: 9999;
+  display: grid;
+  place-items: center;
+  padding: var(--mobox-gap);
+  pointer-events: none;
+}
+
+.mobox[data-align='bottom'] {
+  align-items: end;
+}
+
+.mobox.mobox-open {
+  z-index: 10000;
+}
+
+.mobox-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--mobox-overlay);
+  opacity: 0;
+  transition: opacity 0.35s ease;
+}
+
+.mobox.mobox-open .mobox-overlay {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.mobox-inner {
+  position: relative;
+  z-index: 5;
+  width: min(560px, 100%);
+  max-height: calc(100dvh - 2 * var(--mobox-gap));
+  overflow: auto;
+  overscroll-behavior: contain;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--mobox-surface);
+  color: var(--mobox-text);
+  border: 1px solid var(--mobox-surface-border);
+  border-radius: var(--mobox-radius);
+  padding: var(--mobox-pad);
+  box-shadow:
+    0 24px 80px rgba(0, 0, 0, 0.55),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+}
+
+.mobox.mobox-open .mobox-inner {
+  pointer-events: auto;
+}
+
+.mobox-icon-close {
+  position: absolute;
+  top: -14px;
+  right: -14px;
+  z-index: 10;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--mobox-surface-border);
+  border-radius: 50%;
+  background: var(--mobox-surface);
+  color: var(--mobox-text);
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    border-color 0.2s ease;
+}
+
+.mobox-icon-close::before,
+.mobox-icon-close::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 16px;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+}
+
+.mobox-icon-close::before {
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.mobox-icon-close::after {
+  transform: translate(-50%, -50%) rotate(-45deg);
+}
+
+.mobox-icon-close:hover,
+.mobox-icon-close:focus-visible {
+  transform: scale(1.1);
+  border-color: var(--mobox-text);
+  outline: none;
+}
+
+.mobox-title {
+  margin: 0 0 0.6em;
+  font-size: clamp(1.3rem, 3vmin, 1.7rem);
+  font-weight: 650;
+  line-height: 1.25;
+}
+
+.mobox-cont {
+  margin: 0 0 1.2em;
+  font-size: 1rem;
+  line-height: 1.65;
+  opacity: 0.82;
+}
+
+.mobox-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.6em;
+  justify-content: flex-end;
+}
+
+.mobox-btn {
+  padding: 0.7em 1.5em;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  transition:
+    filter 0.15s ease,
+    transform 0.15s ease;
+}
+
+.mobox-btn:hover {
+  filter: brightness(1.12);
+}
+
+.mobox-btn:active {
+  transform: scale(0.97);
+}
+
+.mobox-btn-primary {
+  background: linear-gradient(135deg, #7c5cff, #4f46e5);
+  color: #fff;
+}
+
+.mobox-btn-ghost {
+  background: transparent;
+  border-color: var(--mobox-surface-border);
+  color: var(--mobox-text);
+}
+
+/* Scenes: only the active scene is displayed */
+.mobox-scene {
+  display: none;
+}
+
+.mobox-scene-active {
+  display: block;
+  animation: mobox-scene-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+@keyframes mobox-scene-in {
+  from {
+    opacity: 0;
+    transform: scale(0.98);
+  }
+}
+
+.mobox [hidden] {
+  display: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .mobox-overlay,
+  .mobox-icon-close,
+  .mobox-btn,
+  .mobox-scene-active {
+    transition: none;
+    animation: none;
+  }
+}
