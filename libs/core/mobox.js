@@ -284,39 +284,36 @@ var l = {
 	"#f472b6",
 	"#fbbf24"
 ];
-function _(e) {
+function _(e, t) {
 	if (o()) return;
-	let t = e.getBoundingClientRect(), n = document.createElement("canvas"), r = Math.min(window.devicePixelRatio || 1, 2);
-	n.width = window.innerWidth * r, n.height = window.innerHeight * r, Object.assign(n.style, {
+	let n = e.getBoundingClientRect(), r = t.offsetWidth || 560, i = t.offsetHeight || 200, a = t.offsetParent, s = a ? a.getBoundingClientRect() : n, c = a ? s.left + t.offsetLeft : n.left + (n.width - r) / 2, l = a ? s.top + t.offsetTop : n.top + (n.height - i) / 2, u = document.createElement("canvas"), d = Math.min(window.devicePixelRatio || 1, 2);
+	u.width = window.innerWidth * d, u.height = window.innerHeight * d, Object.assign(u.style, {
 		position: "fixed",
-		inset: "0",
+		inset: 0,
 		zIndex: "9998",
 		pointerEvents: "none"
-	}), document.body.appendChild(n);
-	let i = n.getContext("2d");
-	if (!i) {
-		n.remove();
+	}), document.body.appendChild(u);
+	let f = u.getContext("2d");
+	if (!f) {
+		u.remove();
 		return;
 	}
-	i.scale(r, r);
-	let a = t.left + t.width / 2, s = t.top + t.height / 2, c = Array.from({ length: 90 }, () => {
-		let e = Math.random() * Math.PI * 2, t = 2.5 + Math.random() * 7;
-		return {
-			x: a,
-			y: s,
-			vx: Math.cos(e) * t,
-			vy: Math.sin(e) * t,
-			size: 1.5 + Math.random() * 3.5,
-			color: g[Math.floor(Math.random() * g.length)],
-			life: 1
-		};
-	}), l = () => {
-		i.clearRect(0, 0, window.innerWidth, window.innerHeight);
+	f.scale(d, d);
+	let p = Array.from({ length: 110 }, () => ({
+		x: c + 16 + Math.random() * Math.max(r - 32, 1),
+		y: l - 2 + Math.random() * 8,
+		vx: Math.cos(-Math.PI / 2 + (Math.random() - .5) * 1.8) * (2 + Math.random() * 5),
+		vy: Math.sin(-Math.PI / 2 + (Math.random() - .5) * 1.8) * (2 + Math.random() * 5),
+		size: 1.5 + Math.random() * 3,
+		color: g[Math.floor(Math.random() * g.length)],
+		life: 1
+	})), m = () => {
+		f.clearRect(0, 0, window.innerWidth, window.innerHeight);
 		let e = !1;
-		for (let t of c) t.life <= 0 || (e = !0, t.x += t.vx, t.y += t.vy, t.vy += .12, t.vx *= .98, t.life -= .016, i.globalAlpha = Math.max(t.life, 0), i.fillStyle = t.color, i.beginPath(), i.arc(t.x, t.y, t.size, 0, Math.PI * 2), i.fill());
-		e ? requestAnimationFrame(l) : n.remove();
+		for (let t of p) t.life <= 0 || (e = !0, t.x += t.vx, t.y += t.vy, t.vy += .05, t.vx *= .985, t.vy *= .99, t.life -= .012, f.globalAlpha = Math.max(t.life, 0), f.fillStyle = t.color, f.beginPath(), f.arc(t.x, t.y, t.size, 0, Math.PI * 2), f.fill());
+		e ? requestAnimationFrame(m) : u.remove();
 	};
-	requestAnimationFrame(l);
+	requestAnimationFrame(m);
 }
 var v = {
 	name: "sparkle",
@@ -332,7 +329,7 @@ var v = {
 			easing: "cubic-bezier(0.22, 1, 0.36, 1)",
 			fill: "both"
 		});
-		return _(e.inner), t;
+		return _(e.root, e.inner), t;
 	},
 	exit: ({ inner: e }) => e.animate([{
 		opacity: 1,
