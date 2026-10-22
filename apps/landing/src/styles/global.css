@@ -7,6 +7,15 @@
   --text: #eceaf4;
   --text-dim: rgba(236, 234, 244, 0.62);
   --text-faint: rgba(236, 234, 244, 0.38);
+  --nav-bg: rgba(11, 11, 20, 0.72);
+  --code-bg: #0d0d18;
+  --code-fg: #c9d1f9;
+  --canvas-bg: #0d0d18;
+  --node-fill: rgba(255, 255, 255, 0.045);
+  --ghost-bg: rgba(255, 255, 255, 0.05);
+  --ghost-bg-hover: rgba(255, 255, 255, 0.09);
+  --veil: rgba(11, 11, 20, 0.55);
+  --veil-2: rgba(11, 11, 20, 0.92);
   --violet: #7c5cff;
   --cyan: #22d3ee;
   --pink: #f472b6;
@@ -18,6 +27,26 @@
   --font: -apple-system, BlinkMacSystemFont, 'SF Pro Text', 'PingFang SC',
     'Hiragino Sans GB', 'Microsoft YaHei', 'Segoe UI', Roboto, sans-serif;
   --mono: 'SF Mono', 'JetBrains Mono', Menlo, Consolas, 'Courier New', monospace;
+}
+
+:root[data-theme='light'] {
+  --bg: #f7f7fb;
+  --bg-soft: #ffffff;
+  --surface: rgba(23, 20, 43, 0.03);
+  --surface-strong: rgba(23, 20, 43, 0.05);
+  --line: rgba(23, 20, 43, 0.1);
+  --text: #17142b;
+  --text-dim: rgba(23, 20, 43, 0.66);
+  --text-faint: rgba(23, 20, 43, 0.42);
+  --nav-bg: rgba(247, 247, 251, 0.78);
+  --code-bg: #17142b;
+  --code-fg: #d5dcf5;
+  --canvas-bg: #12101f;
+  --node-fill: rgba(23, 20, 43, 0.04);
+  --ghost-bg: rgba(23, 20, 43, 0.04);
+  --ghost-bg-hover: rgba(23, 20, 43, 0.08);
+  --veil: rgba(247, 247, 251, 0.35);
+  --veil-2: rgba(247, 247, 251, 0.92);
 }
 
 * {
@@ -123,7 +152,7 @@ section {
   justify-content: space-between;
   gap: 1rem;
   padding: 0.85rem clamp(1rem, 4vw, 2.5rem);
-  background: rgba(11, 11, 20, 0.72);
+  background: var(--nav-bg);
   backdrop-filter: blur(14px);
   border-bottom: 1px solid var(--line);
 }
@@ -181,6 +210,34 @@ section {
   filter: brightness(1.12);
 }
 
+.nav-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3em;
+  min-width: 34px;
+  height: 34px;
+  padding: 0 0.55em;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: var(--surface);
+  color: var(--text-dim);
+  font-size: 0.8rem;
+  font-weight: 650;
+  cursor: pointer;
+  transition: color 0.15s ease, border-color 0.15s ease;
+}
+
+.nav-toggle:hover {
+  color: var(--text);
+  border-color: var(--cyan);
+}
+
+.nav-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
 /* ---------- hero ---------- */
 .hero {
   position: relative;
@@ -204,8 +261,8 @@ section {
   position: absolute;
   inset: 0;
   background:
-    radial-gradient(ellipse 80% 55% at 50% 42%, transparent 0%, rgba(11, 11, 20, 0.55) 100%),
-    linear-gradient(to bottom, rgba(11, 11, 20, 0.35), rgba(11, 11, 20, 0.92) 88%);
+    radial-gradient(ellipse 80% 55% at 50% 42%, transparent 0%, var(--veil) 100%),
+    linear-gradient(to bottom, var(--veil), var(--veil-2) 88%);
   pointer-events: none;
 }
 
@@ -222,7 +279,7 @@ section {
   padding: 0.42em 1em;
   border: 1px solid var(--line);
   border-radius: 999px;
-  background: rgba(11, 11, 20, 0.55);
+  background: var(--nav-bg);
   backdrop-filter: blur(8px);
   font-size: 0.82rem;
   color: var(--text-dim);
@@ -305,7 +362,7 @@ section {
 }
 
 .btn-ghost {
-  background: rgba(255, 255, 255, 0.05);
+  background: var(--ghost-bg);
   border: 1px solid var(--line);
   color: var(--text);
   backdrop-filter: blur(8px);
@@ -313,7 +370,7 @@ section {
 
 .btn-ghost:hover {
   transform: translateY(-2px);
-  background: rgba(255, 255, 255, 0.09);
+  background: var(--ghost-bg-hover);
 }
 
 .hero-stats {
@@ -576,12 +633,12 @@ pre.code {
   padding: 1.3rem 1.4rem;
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  background: #0d0d18;
+  background: var(--code-bg);
   overflow-x: auto;
   font-family: var(--mono);
   font-size: 0.82rem;
   line-height: 1.7;
-  color: #c9d1f9;
+  color: var(--code-fg);
 }
 
 pre.code .k {
@@ -599,7 +656,6 @@ pre.code .f {
 pre.code .c {
   color: rgba(236, 234, 244, 0.32);
 }
-
 pre.code .t {
   color: #ffcb6b;
 }
@@ -612,7 +668,7 @@ pre.code .t {
   padding: 0.9rem 1.1rem;
   border: 1px solid var(--line);
   border-radius: 14px;
-  background: #0d0d18;
+  background: var(--code-bg);
   font-family: var(--mono);
   font-size: 0.92rem;
   margin-bottom: 0.7rem;
@@ -625,7 +681,7 @@ pre.code .t {
 
 .install-cmd code {
   flex: 1;
-  color: #e6e6f0;
+  color: var(--code-fg);
   white-space: nowrap;
   overflow-x: auto;
 }
@@ -649,6 +705,61 @@ pre.code .t {
 .copy-btn.copied {
   color: #34d399;
   border-color: #34d399;
+}
+
+/* ---------- install steps ---------- */
+.install-steps {
+  display: grid;
+  gap: 0.8rem;
+  margin: 1.2rem 0 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.install-steps li {
+  display: flex;
+  gap: 0.9rem;
+  align-items: flex-start;
+  padding: 0.95rem 1.1rem;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--surface);
+}
+
+.install-steps li::before {
+  counter-increment: step;
+  content: counter(step);
+  flex: none;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: var(--grad);
+  color: #fff;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.install-steps b {
+  display: block;
+  font-size: 0.95rem;
+  margin-bottom: 0.2rem;
+}
+
+.install-steps span {
+  font-size: 0.88rem;
+  color: var(--text-dim);
+}
+
+.install-steps code {
+  font-family: var(--mono);
+  font-size: 0.85em;
+  color: var(--cyan);
+  background: rgba(34, 211, 238, 0.08);
+  padding: 0.1em 0.4em;
+  border-radius: 6px;
 }
 
 /* ---------- update panel ---------- */
@@ -753,8 +864,8 @@ pre.code .t {
   display: block;
   border-radius: var(--radius);
   border: 1px solid var(--line);
-  background: #0d0d18;
-  cursor: crosshair;
+  background: var(--canvas-bg);
+  cursor: pointer;
 }
 
 /* ---------- arch diagram ---------- */
@@ -778,7 +889,7 @@ pre.code .t {
 }
 
 .arch .node-box {
-  fill: rgba(255, 255, 255, 0.045);
+  fill: var(--node-fill);
   stroke: var(--line);
   rx: 10;
 }

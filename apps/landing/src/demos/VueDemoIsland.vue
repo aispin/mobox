@@ -1,26 +1,22 @@
 <script setup lang="ts">
-import { ref } from 'vue'
+import { inject, ref } from 'vue'
 import { Mobox } from '@mobox/vue'
+import type { MsgKey } from '../lib/i18n'
 
+const t = inject<(key: MsgKey) => string>('mobox-t')!
 const open = ref(false)
 </script>
 
 <template>
   <h3>@mobox/vue</h3>
-  <p>
-    Vue 3 适配组件，v-model:open 双向绑定，
-    Teleport 到 body，内部同样复用 @mobox/core。
-  </p>
-  <button class="btn btn-primary" @click="open = true">用 Vue 组件打开</button>
+  <p>{{ t('demos.vue.desc') }}</p>
+  <button class="btn btn-primary" @click="open = true">{{ t('demos.vue.btn') }}</button>
   <Mobox v-model:open="open" effect="flip">
-    <h2 class="mobox-title">Vue 3.5 适配版</h2>
-    <p class="mobox-cont">
-      这个弹窗由 <b>@mobox/vue</b> 渲染——你现在看到的整个页面是 React 应用，
-      这里是一个 Vue Island。
-    </p>
+    <h2 class="mobox-title">{{ t('demos.vue.dialogTitle') }}</h2>
+    <p class="mobox-cont" v-html="t('demos.vue.dialogP')" />
     <div class="mobox-actions">
-      <button class="mobox-btn mobox-btn-ghost" data-mobox-close>关闭</button>
-      <button class="mobox-btn mobox-btn-primary" data-mobox-close>知道了</button>
+      <button class="mobox-btn mobox-btn-ghost" data-mobox-close>{{ t('effects.close') }}</button>
+      <button class="mobox-btn mobox-btn-primary" data-mobox-close>{{ t('effects.gotit') }}</button>
     </div>
   </Mobox>
 </template>

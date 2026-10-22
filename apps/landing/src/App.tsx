@@ -11,6 +11,7 @@ import { UpdatePanel } from './components/UpdatePanel'
 import { UpdateBanner } from './components/UpdateBanner'
 import { Footer } from './components/Footer'
 import { useUpdate } from './lib/useUpdate'
+import { useTheme } from './lib/theme'
 
 /** Adds .visible to .reveal elements as they scroll into view. */
 function useReveal() {
@@ -52,6 +53,7 @@ function useReveal() {
 
 export default function App() {
   const { status, remote, lastChecked, error, swReady, check, applyUpdate } = useUpdate()
+  const { theme, toggle } = useTheme()
   useReveal()
 
   const available = status === 'available' || swReady
@@ -59,7 +61,7 @@ export default function App() {
   return (
     <>
       <UpdateBanner available={available} swReady={swReady} remote={remote} onApply={applyUpdate} />
-      <Nav />
+      <Nav theme={theme} onToggleTheme={toggle} />
       <main>
         <Hero />
         <Marquee />

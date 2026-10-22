@@ -1,5 +1,6 @@
 import { CURRENT_VERSION } from '../lib/version'
 import type { RemoteVersion } from '../lib/version'
+import { useI18n } from '../lib/i18n'
 
 interface Props {
   available: boolean
@@ -9,15 +10,19 @@ interface Props {
 }
 
 export function UpdateBanner({ available, swReady, remote, onApply }: Props) {
+  const { t } = useI18n()
   if (!available) return null
   return (
     <div className="update-banner show" role="alert">
       <span>
         {swReady
-          ? '新版本已就绪，刷新即可生效'
-          : `发现新版本 v${remote?.version ?? '?'}（当前 v${CURRENT_VERSION}）`}
+          ? t('banner.swReady')
+          : t('banner.available', {
+              remote: remote?.version ?? '?',
+              current: CURRENT_VERSION,
+            })}
       </span>
-      <button onClick={onApply}>{swReady ? '立即更新' : '刷新页面'}</button>
+      <button onClick={onApply}>{swReady ? t('banner.update') : t('banner.reload')}</button>
     </div>
   )
 }

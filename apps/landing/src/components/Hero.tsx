@@ -1,9 +1,10 @@
 import { useEffect, useRef } from 'react'
 import { createHeroScene } from '../webgl/heroScene'
-import { CURRENT_VERSION } from '../lib/version'
+import { useI18n } from '../lib/i18n'
 
 export function Hero() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const { t, rich } = useI18n()
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -19,46 +20,40 @@ export function Hero() {
       <div className="hero-content">
         <div className="hero-badge">
           <span className="dot" />
-          MOBOX <b>2.0</b> 现已发布 · 无框架依赖 · PWA
+          {t('hero.badge')}
         </div>
         <h1>
-          弹窗，<span className="grad-text">重新想象</span>
+          {t('hero.title1')} <span className="grad-text">{t('hero.title2')}</span>
         </h1>
-        <p className="hero-sub">
-          Modern Dialog + Pop Box + Overlay。效果即组件，基于{' '}
-          <code>Web Animations</code> / <code>WebGL</code> / <code>GLSL</code>{' '}
-          从零重写。一份核心，三种框架：<code>core</code> · <code>react</code> ·{' '}
-          <code>vue</code>。
-        </p>
+        <p className="hero-sub">{rich('hero.sub')}</p>
         <div className="hero-actions">
           <a className="btn btn-primary" href="#install">
-            立即安装
+            {t('hero.cta1')}
           </a>
           <a className="btn btn-ghost" href="#effects">
-            体验 10 种效果
+            {t('hero.cta2')}
           </a>
         </div>
         <div className="hero-stats">
           <div className="hero-stat">
             <b className="grad-text">10+</b>
-            <span>可组合效果组件</span>
+            <span>{t('hero.stat1')}</span>
           </div>
           <div className="hero-stat">
             <b className="grad-text">0</b>
-            <span>核心运行时依赖</span>
+            <span>{t('hero.stat2')}</span>
           </div>
           <div className="hero-stat">
             <b className="grad-text">~4KB</b>
-            <span>GZIPPED 核心体积</span>
+            <span>{t('hero.stat3')}</span>
           </div>
           <div className="hero-stat">
             <b className="grad-text">100</b>
-            <span>LIGHTHOUSE PWA</span>
+            <span>{t('hero.stat4')}</span>
           </div>
         </div>
       </div>
       <div className="scroll-hint">SCROLL</div>
-      <span style={{ display: 'none' }}>{CURRENT_VERSION}</span>
     </header>
   )
 }

@@ -1,37 +1,35 @@
 import { Mobox } from '@mobox/core'
+import { useI18n } from '../lib/i18n'
 
-const TPL = `
+export function VanillaDemo() {
+  const { t } = useI18n()
+
+  const open = () => {
+    const box = Mobox.create({
+      tpl: `
 <div class="mobox" data-effect="glitch">
   <div class="mobox-overlay"></div>
   <div class="mobox-inner">
-    <h2 class="mobox-title">无框架依赖版</h2>
-    <p class="mobox-cont">
-      这个弹窗由 <b>@mobox/core</b> 直接用模板字符串创建，
-      没有任何框架参与。数据通过 show(data) 绑定到 .mobox-title 等节点。
-    </p>
+    <h2 class="mobox-title">${t('demos.vanilla.dialogTitle')}</h2>
+    <p class="mobox-cont">${t('demos.vanilla.dialogP')}</p>
     <div class="mobox-actions">
-      <button class="mobox-btn mobox-btn-ghost" data-mobox-close>关闭</button>
-      <button class="mobox-btn mobox-btn-primary" data-mobox-close>知道了</button>
+      <button class="mobox-btn mobox-btn-ghost" data-mobox-close>${t('effects.close')}</button>
+      <button class="mobox-btn mobox-btn-primary" data-mobox-close>${t('effects.gotit')}</button>
     </div>
-    <button class="mobox-icon-close" data-mobox-close aria-label="Close"></button>
+    <button class="mobox-icon-close" data-mobox-close aria-label="${t('effects.close')}"></button>
   </div>
-</div>`
-
-export function VanillaDemo() {
-  const open = () => {
-    const box = Mobox.create({ tpl: TPL, effect: 'glitch' })
+</div>`,
+      effect: 'glitch',
+    })
     box?.show({ title: 'Hello, MOBOX core' })
   }
 
   return (
     <>
       <h3 style={{ margin: 0, fontSize: '1.15rem' }}>@mobox/core</h3>
-      <p>
-        命令式 API：Mobox.create() + show(data)。模板即结构，
-        效果通过 data-effect 指定。
-      </p>
+      <p>{t('demos.vanilla.desc')}</p>
       <button className="btn btn-primary" onClick={open}>
-        用 core 打开弹窗
+        {t('demos.vanilla.btn')}
       </button>
     </>
   )

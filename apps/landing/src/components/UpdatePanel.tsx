@@ -1,6 +1,7 @@
 import { CURRENT_VERSION } from '../lib/version'
 import type { UpdateStatus } from '../lib/useUpdate'
 import type { RemoteVersion } from '../lib/version'
+import { useI18n } from '../lib/i18n'
 
 interface Props {
   status: UpdateStatus
@@ -12,16 +13,16 @@ interface Props {
   onApply: () => void
 }
 
-const STATUS_TEXT: Record<UpdateStatus, string> = {
-  idle: '待检查',
-  checking: '检查中…',
-  latest: '已是最新',
-  available: '发现新版本',
-  error: '检查失败',
+const STATUS_KEYS: Record<UpdateStatus, 'update.idle' | 'update.checking' | 'update.latest' | 'update.available' | 'update.error'> = {
+  idle: 'update.idle',
+  checking: 'update.checking',
+  latest: 'update.latest',
+  available: 'update.available',
+  error: 'update.error',
 }
 
 function formatTime(ts: number): string {
-  return new Date(ts).toLocaleTimeString('zh-CN', { hour12: false })
+  return new Date(ts).toLocaleTimeString(undefined, { hour12: false })
 }
 
 export function UpdatePanel({
@@ -33,55 +34,51 @@ export function UpdatePanel({
   onCheck,
   onApply,
 }: Props) {
+  const { t } = useI18n()
   const available = status === 'available' || swReady
 
   return (
     <section id="update">
       <div className="wrap">
         <div className="section-head reveal">
-          <div className="section-kicker">Version Discovery &amp; Update</div>
+          <div className="section-kicker">{t('update.kicker')}</div>
           <h2 className="section-title">
-            落地页自带<span className="grad-text">版本发现与更新</span>
+            {t('update.title1')} <span className="grad-text">{t('update.title2')}</span>
           </h2>
-          <p className="section-sub">
-            页面启动、每 5 分钟、切回标签页、网络恢复时自动拉取{' '}
-            <code>version.json</code>；发现新版本即提示。PWA Service Worker
-            就绪后，一键热更新并自动 reload。
-          </p>
+          <p className="section-sub">{t('update.sub')}</p>
         </div>
 
         <div className="card reveal" style={{ padding: '1.6rem' }}>
           <div className="update-panel">
             <div className="update-cell">
-              <span>当前版本</span>
+              <span>{t('update.current')}</span>
               <b>v{CURRENT_VERSION}</b>
             </div>
             <div className="update-cell">
-              <span>线上版本</span>
+              <span>{t('update.remote')}</span>
               <b className={remote ? (available ? 'warn' : 'ok') : ''}>
                 {remote ? `v${remote.version}` : '—'}
               </b>
             </div>
             <div className="update-cell">
-              <span>检查状态</span>
+              <span>{t('update.status')}</span>
               <b
                 className={
                   status === 'error' ? 'err' : available ? 'warn' : 'ok'
                 }
               >
-                {STATUS_TEXT[status]}
-                {swReady ? '（SW 就绪）' : ''}
+                {t(STATUS_KEYS[status])}
               </b>
             </div>
             <div className="update-cell">
-              <span>最近检查</span>
+              <span>{t('update.lastChecked')}</span>
               <b>{lastChecked ? formatTime(lastChecked) : '—'}</b>
             </div>
           </div>
 
           <div className="update-actions">
             <button className="btn btn-primary" onClick={onCheck}>
-              立即检查更新
+              {t('update.check')}
             </button>
             <button
               className="btn btn-ghost"
@@ -89,7 +86,7 @@ export function UpdatePanel({
               disabled={!available}
               style={available ? undefined : { opacity: 0.45, cursor: 'not-allowed' }}
             >
-              {swReady ? '热更新并刷新' : '刷新页面'}
+              {swReady ? t('update.apply') : t('update.reload')}
             </button>
             {error && (
               <span className="update-note" style={{ color: '#fb7185' }}>
@@ -97,18 +94,9 @@ export function UpdatePanel({
               </span>
             )}
             {!error && status === 'latest' && (
-              <span className="update-note">version.json 与当前构建一致。</span>
+              <span className="update-note">{t('update.latestNote')}</span>
             )}
           </div>
-
-          <pre className="code" style={{ marginTop: '1.4rem' }}>
-            <code>{`// public/version.json —— 每次构建由 package.json 同步生成
-{
-  "version": "${remote?.version ?? CURRENT_VERSION}",
-  "buildTime": "${remote?.buildTime ?? '—'}",
-  "notes": "${remote?.notes ?? '—'}"
-}`}</code>
-          </pre>
         </div>
       </div>
     </section>

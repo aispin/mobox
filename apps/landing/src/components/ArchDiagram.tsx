@@ -1,24 +1,25 @@
+import { useI18n } from '../lib/i18n'
+
 /** Animated monorepo architecture diagram (pure SVG + CSS). */
 export function ArchDiagram() {
+  const { t } = useI18n()
+
   return (
     <section id="arch">
       <div className="wrap">
         <div className="section-head reveal">
-          <div className="section-kicker">Monorepo</div>
+          <div className="section-kicker">{t('arch.kicker')}</div>
           <h2 className="section-title">
-            pnpm workspace + <span className="grad-text">catalog</span> 版本收敛
+            {t('arch.title1')} <span className="grad-text">{t('arch.title2')}</span>
           </h2>
-          <p className="section-sub">
-            一份 pnpm-workspace.yaml 收敛全部共享依赖版本，TS 7 / Vite 8 /
-            React 19 / Vue 3.5 全量最新。
-          </p>
+          <p className="section-sub">{t('arch.sub')}</p>
         </div>
         <div className="card reveal" style={{ padding: '1.2rem' }}>
           <svg
             className="arch"
             viewBox="0 0 760 380"
             role="img"
-            aria-label="Monorepo 架构图"
+            aria-label={t('arch.title2')}
           >
             <defs>
               <linearGradient id="archgrad" x1="0" y1="0" x2="1" y2="1">
@@ -30,19 +31,19 @@ export function ArchDiagram() {
             {/* root */}
             <rect className="node-box" x="300" y="16" width="160" height="52" rx="10" />
             <text className="node-label" x="380" y="38" textAnchor="middle">
-              mobox (root)
+              {t('arch.root')}
             </text>
             <text className="node-sub" x="380" y="56" textAnchor="middle">
-              packageManager: pnpm@12
+              {t('arch.pm')}
             </text>
 
             {/* workspace file */}
             <rect className="node-box" x="560" y="16" width="180" height="52" rx="10" />
             <text className="node-label" x="650" y="38" textAnchor="middle">
-              pnpm-workspace.yaml
+              {t('arch.workspace')}
             </text>
             <text className="node-sub" x="650" y="56" textAnchor="middle">
-              catalog: 收敛版本
+              {t('arch.catalogFile')}
             </text>
             <path className="edge" d="M460 42 L560 42" />
 
@@ -56,7 +57,7 @@ export function ArchDiagram() {
               rx="10"
             />
             <text className="node-label" x="650" y="146" textAnchor="middle">
-              catalog:
+              {t('arch.catalog')}
             </text>
             <text className="node-sub" x="650" y="168" textAnchor="middle">
               typescript ^7.0.2
@@ -78,10 +79,10 @@ export function ArchDiagram() {
               @mobox/core
             </text>
             <text className="node-sub" x="170" y="198" textAnchor="middle">
-              无框架依赖 · 零依赖
+              {t('arch.coreSub')}
             </text>
             <text className="node-sub" x="170" y="216" textAnchor="middle">
-              dist: es + umd
+              {t('arch.dist')}
             </text>
 
             <rect className="node-box" x="290" y="150" width="180" height="86" rx="10" />
@@ -89,10 +90,10 @@ export function ArchDiagram() {
               @mobox/react
             </text>
             <text className="node-sub" x="380" y="198" textAnchor="middle">
-              React 19 · forwardRef
+              {t('arch.reactSub')}
             </text>
             <text className="node-sub" x="380" y="216" textAnchor="middle">
-              dist: es + umd
+              {t('arch.dist')}
             </text>
 
             <rect className="node-box" x="490" y="150" width="180" height="86" rx="10" />
@@ -100,10 +101,10 @@ export function ArchDiagram() {
               @mobox/vue
             </text>
             <text className="node-sub" x="580" y="198" textAnchor="middle">
-              Vue 3.5 · render fn
+              {t('arch.vueSub')}
             </text>
             <text className="node-sub" x="580" y="216" textAnchor="middle">
-              dist: es + umd
+              {t('arch.dist')}
             </text>
 
             {/* landing app */}
@@ -123,7 +124,7 @@ export function ArchDiagram() {
               @mobox/landing
             </text>
             <text className="node-sub" x="380" y="350" textAnchor="middle">
-              React + Three.js + GLSL + PWA → gh-pages
+              {t('arch.landingSub')}
             </text>
           </svg>
         </div>

@@ -1,6 +1,9 @@
 import { useEffect, useRef } from 'react'
+import { Mobox } from '@mobox/core'
+import { useI18n } from '../lib/i18n'
 
 interface Particle {
+  id: number
   x: number
   y: number
   vx: number
@@ -11,9 +14,14 @@ interface Particle {
 const COUNT = 90
 const LINK_DIST = 120
 const POINTER_RADIUS = 140
+const HIT_DIST = 36
 
 export function Constellation() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
+  const particlesRef = useRef<Particle[]>([])
+  const { t } = useI18n()
+  const tRef = useRef(t)
+  tRef.current = t
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -28,6 +36,7 @@ export function Constellation() {
     const pointer = { x: -9999, y: -9999 }
 
     const particles: Particle[] = []
+    particlesRef.current = particles
 
     const resize = () => {
       const dpr = Math.min(window.devicePixelRatio || 1, 2)
@@ -43,6 +52,7 @@ export function Constellation() {
       particles.length = 0
       for (let i = 0; i < COUNT; i++) {
         particles.push({
+          id: i,
           x: Math.random() * width,
           y: Math.random() * height,
           vx: (Math.random() - 0.5) * 0.5,
@@ -123,6 +133,42 @@ export function Constellation() {
       pointer.y = -9999
     }
 
+    /** Click a star node -> a Mobox dialog lights up right there. */
+    const onClick = (e: MouseEvent) => {
+      const rect = canvas.getBoundingClientRect()
+      const x = e.clientX - rect.left
+      const y = e.clientY - rect.top
+      let best: Particle | null = null
+      let bestD = HIT_DIST
+      for (const p of particles) {
+        const d = Math.hypot(p.x - x, p.y - y)
+        if (d < bestD) {
+          bestD = d
+          best = p
+        }
+      }
+      if (!best) return
+      const tr = tRef.current
+      Mobox.create({
+        tpl: `
+<div class="mobox" data-effect="sparkle">
+  <div class="mobox-overlay"></div>
+  <div class="mobox-inner">
+    <h2 class="mobox-title">${tr('playground.dialogTitle', { id: best.id })}</h2>
+    <p class="mobox-cont">${tr('playground.dialogP', {
+      x: Math.round(best.x),
+      y: Math.round(best.y),
+    })}</p>
+    <div class="mobox-actions">
+      <button class="mobox-btn mobox-btn-primary" data-mobox-close>${tr('effects.gotit')}</button>
+    </div>
+    <button class="mobox-icon-close" data-mobox-close aria-label="${tr('effects.close')}"></button>
+  </div>
+</div>`,
+        effect: 'sparkle',
+      })
+    }
+
     resize()
     seed()
     start()
@@ -141,6 +187,7 @@ export function Constellation() {
 
     canvas.addEventListener('pointermove', onPointer)
     canvas.addEventListener('pointerleave', onLeave)
+    canvas.addEventListener('click', onClick)
 
     return () => {
       stop()
@@ -148,6 +195,7 @@ export function Constellation() {
       ro.disconnect()
       canvas.removeEventListener('pointermove', onPointer)
       canvas.removeEventListener('pointerleave', onLeave)
+      canvas.removeEventListener('click', onClick)
     }
   }, [])
 
@@ -155,17 +203,13 @@ export function Constellation() {
     <section id="playground">
       <div className="wrap">
         <div className="section-head reveal">
-          <div className="section-kicker">Web3D Playground</div>
+          <div className="section-kicker">{t('playground.kicker')}</div>
           <h2 className="section-title">
-            Canvas 2D · <span className="grad-text">实时粒子场</span>
+            {t('playground.title1')} <span className="grad-text">{t('playground.title2')}</span>
           </h2>
-          <p className="section-sub">
-            Hero 背景由 Three.js + 自定义 GLSL Shader（域扭曲星云 + SDF
-            盒阵光线步进）渲染；这里是一个零依赖的 Canvas 2D
-            粒子星座，移动鼠标试试。
-          </p>
+          <p className="section-sub">{t('playground.sub')}</p>
         </div>
-        <canvas ref={canvasRef} className="constellation reveal" aria-label="粒子星座画布" />
+        <canvas ref={canvasRef} className="constellation reveal" aria-label="particle constellation" />
       </div>
     </section>
   )

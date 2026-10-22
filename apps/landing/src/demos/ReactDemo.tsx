@@ -1,31 +1,30 @@
 import { useState } from 'react'
 import { Mobox } from '@mobox/react'
+import { useI18n } from '../lib/i18n'
 
 export function ReactDemo() {
   const [open, setOpen] = useState(false)
+  const { t } = useI18n()
 
   return (
     <>
       <h3 style={{ margin: 0, fontSize: '1.15rem' }}>@mobox/react</h3>
-      <p>
-        受控组件 + forwardRef 命令式句柄。Portal 挂载到 body，
-        open 变化自动同步开关。
-      </p>
+      <p>{t('demos.react.desc')}</p>
       <button className="btn btn-primary" onClick={() => setOpen(true)}>
-        用 React 组件打开
+        {t('demos.react.btn')}
       </button>
       <Mobox open={open} effect="liquid" onOpenChange={setOpen}>
-        <h2 className="mobox-title">React 19 适配版</h2>
-        <p className="mobox-cont">
-          这是来自 <b>@mobox/react</b> 的 &lt;Mobox&gt; 组件，
-          内部复用同一份 @mobox/core 引擎。
-        </p>
+        <h2 className="mobox-title">{t('demos.react.dialogTitle')}</h2>
+        <p
+          className="mobox-cont"
+          dangerouslySetInnerHTML={{ __html: t('demos.react.dialogP') }}
+        />
         <div className="mobox-actions">
           <button className="mobox-btn mobox-btn-ghost" data-mobox-close>
-            关闭
+            {t('effects.close')}
           </button>
           <button className="mobox-btn mobox-btn-primary" data-mobox-close>
-            知道了
+            {t('effects.gotit')}
           </button>
         </div>
       </Mobox>

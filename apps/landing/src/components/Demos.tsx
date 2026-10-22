@@ -2,43 +2,42 @@ import { useState } from 'react'
 import { VanillaDemo } from '../demos/VanillaDemo'
 import { ReactDemo } from '../demos/ReactDemo'
 import { VueIsland } from '../demos/VueIsland'
+import { useI18n } from '../lib/i18n'
 
 type TabKey = 'vanilla' | 'react' | 'vue'
 
-const TABS: Array<{ key: TabKey; label: string }> = [
-  { key: 'vanilla', label: '无框架 core' },
-  { key: 'react', label: 'React' },
-  { key: 'vue', label: 'Vue' },
+const TABS: Array<{ key: TabKey; labelKey: 'demos.tab.vanilla' | 'demos.tab.react' | 'demos.tab.vue' }> = [
+  { key: 'vanilla', labelKey: 'demos.tab.vanilla' },
+  { key: 'react', labelKey: 'demos.tab.react' },
+  { key: 'vue', labelKey: 'demos.tab.vue' },
 ]
 
 export function Demos() {
   const [tab, setTab] = useState<TabKey>('vanilla')
+  const { t } = useI18n()
 
   return (
     <section id="demos">
       <div className="wrap">
         <div className="section-head reveal">
-          <div className="section-kicker">One Core, Three Flavors</div>
+          <div className="section-kicker">{t('demos.kicker')}</div>
           <h2 className="section-title">
-            同一份核心，<span className="grad-text">三端同台</span>
+            {t('demos.title1')} <span className="grad-text">{t('demos.title2')}</span>
           </h2>
-          <p className="section-sub">
-            左侧为真实可点的演示，右侧为对应源码。Vue 演示通过 Vue Island
-            挂载——React 页面里跑着真正的 Vue 组件。
-          </p>
+          <p className="section-sub">{t('demos.sub')}</p>
         </div>
 
         <div className="reveal">
           <div className="tabs" role="tablist">
-            {TABS.map((t) => (
+            {TABS.map((tb) => (
               <button
-                key={t.key}
+                key={tb.key}
                 role="tab"
-                aria-selected={tab === t.key}
-                className={`tab${tab === t.key ? ' active' : ''}`}
-                onClick={() => setTab(t.key)}
+                aria-selected={tab === tb.key}
+                className={`tab${tab === tb.key ? ' active' : ''}`}
+                onClick={() => setTab(tb.key)}
               >
-                {t.label}
+                {t(tb.labelKey)}
               </button>
             ))}
           </div>
@@ -119,7 +118,7 @@ const open = ref(false)
 <template>
   <button @click="open = true">打开</button>
   <Mobox v-model:open="open" effect="flip">
-    <h2 class="mobox-title">Vue 适配版</h2>
+    <h2 className="mobox-title">Vue 适配版</h2>
     <button data-mobox-close>关闭</button>
   </Mobox>
 </template>`}</code>
