@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { Mobox } from '@mobox/react'
+import { Mobox } from '@aifire/mobox-react'
 import { useI18n } from '../lib/i18n'
 
 export function ReactDemo() {
@@ -8,7 +8,7 @@ export function ReactDemo() {
 
   return (
     <>
-      <h3 style={{ margin: 0, fontSize: '1.15rem' }}>@mobox/react</h3>
+      <h3 style={{ margin: 0, fontSize: '1.15rem' }}>@aifire/mobox-react</h3>
       <p>{t('demos.react.desc')}</p>
       <button className="btn btn-primary" onClick={() => setOpen(true)}>
         {t('demos.react.btn')}

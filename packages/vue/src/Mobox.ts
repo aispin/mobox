@@ -7,7 +7,7 @@ import {
   ref,
   watch,
 } from 'vue'
-import { Mobox as MoboxCore, type MoboxInstance, type MoboxOptions } from '@mobox/core'
+import { Mobox as MoboxCore, type MoboxInstance, type MoboxOptions } from '@aifire/mobox-core'
 
 export interface MoboxVueProps {
   open?: boolean

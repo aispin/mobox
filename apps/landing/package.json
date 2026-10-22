@@ -1,5 +1,5 @@
 {
-  "name": "@mobox/landing",
+  "name": "@aifire/landing",
   "version": "2.0.0",
   "private": true,
   "type": "module",
@@ -10,9 +10,9 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "dependencies": {
-    "@mobox/core": "workspace:*",
-    "@mobox/react": "workspace:*",
-    "@mobox/vue": "workspace:*",
+    "@aifire/mobox-core": "workspace:*",
+    "@aifire/mobox-react": "workspace:*",
+    "@aifire/mobox-vue": "workspace:*",
     "react": "catalog:",
     "react-dom": "catalog:",
     "three": "catalog:",

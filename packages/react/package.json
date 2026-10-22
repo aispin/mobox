@@ -1,5 +1,5 @@
 {
-  "name": "@mobox/react",
+  "name": "@aifire/mobox-react",
   "version": "2.0.0",
   "description": "React 19 adapter for MOBOX dialogs",
   "license": "MIT",
@@ -22,12 +22,12 @@
     "typecheck": "tsc -p tsconfig.json --noEmit"
   },
   "peerDependencies": {
-    "@mobox/core": "workspace:*",
+    "@aifire/mobox-core": "workspace:*",
     "react": "^19.0.0",
     "react-dom": "^19.0.0"
   },
   "devDependencies": {
-    "@mobox/core": "workspace:*",
+    "@aifire/mobox-core": "workspace:*",
     "@types/react": "catalog:",
     "@types/react-dom": "catalog:",
     "react": "catalog:",

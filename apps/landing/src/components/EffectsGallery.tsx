@@ -1,4 +1,4 @@
-import { Mobox } from '@mobox/core'
+import { Mobox } from '@aifire/mobox-core'
 import { useI18n } from '../lib/i18n'
 
 const EFFECTS = [

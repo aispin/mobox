@@ -61,21 +61,19 @@ export function Demos() {
 function VanillaCode() {
   return (
     <pre className="code">
-      <code>{`import { Mobox } from '@mobox/core'
-import '@mobox/core/mobox.css'
+      <code>{`import { Mobox } from '@aifire/mobox-core'
+import '@aifire/mobox-core/mobox.css'
 
-const box = Mobox.create({
-  tpl: \`<div class="mobox">
-    <div class="mobox-overlay"></div>
-    <div class="mobox-inner">
-      <h2 class="mobox-title">Hello MOBOX</h2>
-      <button data-mobox-close>关闭</button>
-    </div>
-  </div>\`,
-  effect: 'glitch',
+// 不传 tpl：使用内置基础模板
+// （title + content + 关闭按钮）
+const box = Mobox.create({ effect: 'glitch' })
+box.show({
+  title: 'Hello MOBOX',
+  content: '零依赖，无框架参与。',
 })
 
-box.show({ title: 'Hello MOBOX' })`}</code>
+// 自定义结构：传 tpl（HTML 字符串 / <script> 模板 / 元素 id）
+// Mobox.create({ tpl: '#my-tpl', effect: 'glitch' })`}</code>
     </pre>
   )
 }
@@ -84,8 +82,8 @@ function ReactCode() {
   return (
     <pre className="code">
       <code>{`import { useState } from 'react'
-import { Mobox } from '@mobox/react'
-import '@mobox/core/mobox.css'
+import { Mobox } from '@aifire/mobox-react'
+import '@aifire/mobox-core/mobox.css'
 
 export function App() {
   const [open, setOpen] = useState(false)
@@ -109,8 +107,8 @@ function VueCode() {
     <pre className="code">
       <code>{`<script setup lang="ts">
 import { ref } from 'vue'
-import { Mobox } from '@mobox/vue'
-import '@mobox/core/mobox.css'
+import { Mobox } from '@aifire/mobox-vue'
+import '@aifire/mobox-core/mobox.css'
 
 const open = ref(false)
 <\/script>

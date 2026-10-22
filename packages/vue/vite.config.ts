@@ -12,11 +12,11 @@ export default defineConfig({
       fileName: (format) => (format === 'es' ? 'mobox-vue.js' : 'mobox-vue.umd.cjs'),
     },
     rollupOptions: {
-      external: ['vue', '@mobox/core'],
+      external: ['vue', '@aifire/mobox-core'],
       output: {
         globals: {
           vue: 'Vue',
-          '@mobox/core': 'Mobox',
+          '@aifire/mobox-core': 'Mobox',
         },
       },
     },

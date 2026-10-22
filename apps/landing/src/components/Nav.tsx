@@ -7,7 +7,6 @@ const LINKS = [
   { href: '#demos', key: 'nav.demos' },
   { href: '#playground', key: 'nav.web3d' },
   { href: '#install', key: 'nav.install' },
-  { href: '#update', key: 'nav.update' },
 ] as const
 
 function SunIcon() {

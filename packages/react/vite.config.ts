@@ -14,12 +14,12 @@ export default defineConfig({
       fileName: (format) => (format === 'es' ? 'mobox-react.js' : 'mobox-react.umd.cjs'),
     },
     rollupOptions: {
-      external: ['react', 'react-dom', '@mobox/core'],
+      external: ['react', 'react-dom', '@aifire/mobox-core'],
       output: {
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
-          '@mobox/core': 'Mobox',
+          '@aifire/mobox-core': 'Mobox',
         },
       },
     },

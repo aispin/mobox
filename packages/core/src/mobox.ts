@@ -8,6 +8,19 @@ const OPEN_CLASS = 'mobox-open'
 const SCENE_CLASS = 'mobox-scene'
 const SCENE_ACTIVE_CLASS = 'mobox-scene-active'
 
+/**
+ * Built-in basic template used when `create()` gets neither `el` nor `tpl`.
+ * Bind content via show({ title, content }); pass your own `tpl` to override.
+ */
+const DEFAULT_TPL = `<div class="mobox">
+  <div class="mobox-overlay"></div>
+  <div class="mobox-inner">
+    <h2 class="mobox-title"></h2>
+    <div class="mobox-cont" data-content></div>
+    <button class="mobox-icon-close" data-mobox-close aria-label="Close"></button>
+  </div>
+</div>`
+
 let openCount = 0
 let scrollLocked = false
 
@@ -74,10 +87,10 @@ export class Mobox implements MoboxInstance {
    * optionally showing it immediately with bound `data`.
    */
   static create(opts: MoboxCreateOptions = {}, data?: MoboxSceneData): MoboxInstance | null {
-    const { el, tpl, autoShow = true, ...options } = opts
+    const { el, tpl = DEFAULT_TPL, autoShow = true, ...options } = opts
     let target = resolveEl(el)
     const dynamic = !target
-    if (!target && tpl !== undefined) target = elFromTpl(tpl)
+    if (!target) target = elFromTpl(tpl)
     if (!target) {
       console.error('[mobox] Mobox.create() requires a valid "el" or "tpl" option')
       return null

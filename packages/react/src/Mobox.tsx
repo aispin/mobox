@@ -7,7 +7,7 @@ import React, {
   type ReactNode,
 } from 'react'
 import { createPortal } from 'react-dom'
-import { Mobox as MoboxCore, type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@mobox/core'
+import { Mobox as MoboxCore, type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@aifire/mobox-core'
 
 export interface MoboxProps extends Omit<MoboxOptions, 'effect'> {
   /** Effect name. Default: 'zoom' */

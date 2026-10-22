@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef } from 'react'
-import { Mobox as MoboxCore, type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@mobox/core'
+import { Mobox as MoboxCore, type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@aifire/mobox-core'
 
 export type UseMoboxOptions = MoboxOptions
 

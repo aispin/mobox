@@ -7,8 +7,8 @@
   "packageManager": "pnpm@12.14.0",
   "scripts": {
     "build": "pnpm -r build",
-    "dev": "pnpm --filter @mobox/landing dev",
-    "preview": "pnpm --filter @mobox/landing preview",
+    "dev": "pnpm --filter @aifire/landing dev",
+    "preview": "pnpm --filter @aifire/landing preview",
     "typecheck": "pnpm -r typecheck",
     "icons": "node scripts/gen-icons.mjs"
   },

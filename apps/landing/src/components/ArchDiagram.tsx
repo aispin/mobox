@@ -76,7 +76,7 @@ export function ArchDiagram() {
             <rect className="node-box" x="70" y="150" width="200" height="86" rx="10" />
             <rect className="node-accent" x="70" y="150" width="200" height="86" rx="10" opacity="0.35" />
             <text className="node-label" x="170" y="176" textAnchor="middle">
-              @mobox/core
+              @aifire/mobox-core
             </text>
             <text className="node-sub" x="170" y="198" textAnchor="middle">
               {t('arch.coreSub')}
@@ -87,7 +87,7 @@ export function ArchDiagram() {
 
             <rect className="node-box" x="290" y="150" width="180" height="86" rx="10" />
             <text className="node-label" x="380" y="176" textAnchor="middle">
-              @mobox/react
+              @aifire/mobox-react
             </text>
             <text className="node-sub" x="380" y="198" textAnchor="middle">
               {t('arch.reactSub')}
@@ -98,7 +98,7 @@ export function ArchDiagram() {
 
             <rect className="node-box" x="490" y="150" width="180" height="86" rx="10" />
             <text className="node-label" x="580" y="176" textAnchor="middle">
-              @mobox/vue
+              @aifire/mobox-vue
             </text>
             <text className="node-sub" x="580" y="198" textAnchor="middle">
               {t('arch.vueSub')}
@@ -121,7 +121,7 @@ export function ArchDiagram() {
             />
             <rect className="node-accent" x="180" y="300" width="400" height="64" rx="10" opacity="0.5" />
             <text className="node-label" x="380" y="328" textAnchor="middle">
-              @mobox/landing
+              @aifire/landing
             </text>
             <text className="node-sub" x="380" y="350" textAnchor="middle">
               {t('arch.landingSub')}

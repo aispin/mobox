@@ -1,5 +1,5 @@
 import { useEffect, useRef } from 'react'
-import { Mobox } from '@mobox/core'
+import { Mobox } from '@aifire/mobox-core'
 import { useI18n } from '../lib/i18n'
 
 interface Particle {
@@ -19,7 +19,7 @@ const HIT_DIST = 36
 export function Constellation() {
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const particlesRef = useRef<Particle[]>([])
-  const { t } = useI18n()
+  const { t, rich } = useI18n()
   const tRef = useRef(t)
   tRef.current = t
 
@@ -207,7 +207,7 @@ export function Constellation() {
           <h2 className="section-title">
             {t('playground.title1')} <span className="grad-text">{t('playground.title2')}</span>
           </h2>
-          <p className="section-sub">{t('playground.sub')}</p>
+          <p className="section-sub">{rich('playground.sub')}</p>
         </div>
         <canvas ref={canvasRef} className="constellation reveal" aria-label="particle constellation" />
       </div>

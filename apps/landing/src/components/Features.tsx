@@ -17,14 +17,6 @@ const FEATURES = [
     key: 'features.f4',
     icon: 'M12 3a9 9 0 109 9M12 7v5l3 3',
   },
-  {
-    key: 'features.f5',
-    icon: 'M12 3v12 M7 10l5 5 5-5 M4 19h16',
-  },
-  {
-    key: 'features.f6',
-    icon: 'M3 7l9-4 9 4-9 4-9-4z M3 12l9 4 9-4 M3 17l9 4 9-4',
-  },
 ] as const
 
 export function Features() {

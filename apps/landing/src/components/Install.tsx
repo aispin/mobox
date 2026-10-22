@@ -2,9 +2,9 @@ import { useState } from 'react'
 import { useI18n } from '../lib/i18n'
 
 const MANAGERS = [
-  { key: 'pnpm', label: 'pnpm', cmd: 'pnpm add @mobox/core @mobox/react' },
-  { key: 'npm', label: 'npm', cmd: 'npm i @mobox/core @mobox/react' },
-  { key: 'yarn', label: 'yarn', cmd: 'yarn add @mobox/core @mobox/react' },
+  { key: 'pnpm', label: 'pnpm', cmd: 'pnpm add @aifire/mobox-core @aifire/mobox-react' },
+  { key: 'npm', label: 'npm', cmd: 'npm i @aifire/mobox-core @aifire/mobox-react' },
+  { key: 'yarn', label: 'yarn', cmd: 'yarn add @aifire/mobox-core @aifire/mobox-react' },
 ] as const
 
 export function Install() {
@@ -31,7 +31,7 @@ export function Install() {
           <h2 className="section-title">
             {t('install.title1')} <span className="grad-text">{t('install.title2')}</span>
           </h2>
-          <p className="section-sub">{t('install.sub')}</p>
+          <p className="section-sub">{rich('install.sub')}</p>
         </div>
         <div className="reveal" style={{ maxWidth: 640 }}>
           <ol className="install-steps">
@@ -60,7 +60,7 @@ export function Install() {
                 </div>
                 <div className="install-cmd" style={{ marginTop: '0.5rem', marginBottom: 0 }}>
                   <span className="prompt">$</span>
-                  <code>pnpm add @mobox/core @mobox/vue</code>
+                  <code>pnpm add @aifire/mobox-core @aifire/mobox-vue</code>
                   <span style={{ color: 'var(--text-faint)', fontSize: '0.78rem' }}>
                     {t('install.vue')}
                   </span>
@@ -70,7 +70,15 @@ export function Install() {
             <li>
               <div>
                 <b>{t('install.step2')}</b>
-                <span>{rich('install.step2.desc')}</span>
+                <div className="install-cmd" style={{ marginTop: '0.5rem', marginBottom: '0.4rem' }}>
+                  <span className="prompt">›</span>
+                  <code>{'<link rel="stylesheet" href="/mobox/core/mobox.css">'}</code>
+                </div>
+                <div className="install-cmd" style={{ marginBottom: '0.4rem' }}>
+                  <span className="prompt">›</span>
+                  <code>import '@aifire/mobox-core/mobox.css'</code>
+                </div>
+                <span>{t('install.step2.note')}</span>
               </div>
             </li>
             <li>

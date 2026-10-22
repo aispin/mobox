@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { inject, ref } from 'vue'
-import { Mobox } from '@mobox/vue'
+import { Mobox } from '@aifire/mobox-vue'
 import type { MsgKey } from '../lib/i18n'
 
 const t = inject<(key: MsgKey) => string>('mobox-t')!
@@ -8,7 +8,7 @@ const open = ref(false)
 </script>
 
 <template>
-  <h3>@mobox/vue</h3>
+  <h3>@aifire/mobox-vue</h3>
   <p>{{ t('demos.vue.desc') }}</p>
   <button class="btn btn-primary" @click="open = true">{{ t('demos.vue.btn') }}</button>
   <Mobox v-model:open="open" effect="flip">

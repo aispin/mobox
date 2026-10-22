@@ -1,5 +1,5 @@
 import { onBeforeUnmount, onMounted, ref } from 'vue'
-import { Mobox, type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@mobox/core'
+import { Mobox, type MoboxInstance, type MoboxOptions, type MoboxSceneData } from '@aifire/mobox-core'
 
 export type UseMoboxOptions = MoboxOptions
 

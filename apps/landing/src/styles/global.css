@@ -10,6 +10,9 @@
   --nav-bg: rgba(11, 11, 20, 0.72);
   --code-bg: #0d0d18;
   --code-fg: #c9d1f9;
+  --code-inline-bg: rgba(34, 211, 238, 0.1);
+  --code-inline-fg: #22d3ee;
+  --code-inline-border: rgba(34, 211, 238, 0.22);
   --canvas-bg: #0d0d18;
   --node-fill: rgba(255, 255, 255, 0.045);
   --ghost-bg: rgba(255, 255, 255, 0.05);
@@ -41,6 +44,9 @@
   --nav-bg: rgba(247, 247, 251, 0.78);
   --code-bg: #17142b;
   --code-fg: #d5dcf5;
+  --code-inline-bg: #ffffff;
+  --code-inline-fg: #155e75;
+  --code-inline-border: rgba(21, 94, 117, 0.28);
   --canvas-bg: #12101f;
   --node-fill: rgba(23, 20, 43, 0.04);
   --ghost-bg: rgba(23, 20, 43, 0.04);
@@ -320,12 +326,14 @@ section {
   margin: 0 auto 2.4rem;
 }
 
+.section-sub code,
 .hero-sub code {
   font-family: var(--mono);
   font-size: 0.88em;
-  color: var(--cyan);
-  background: rgba(34, 211, 238, 0.08);
-  padding: 0.1em 0.45em;
+  color: var(--code-inline-fg);
+  background: var(--code-inline-bg);
+  border: 1px solid var(--code-inline-border);
+  padding: 0.06em 0.42em;
   border-radius: 6px;
 }
 
@@ -751,69 +759,6 @@ pre.code .t {
 .install-steps span {
   font-size: 0.88rem;
   color: var(--text-dim);
-}
-
-.install-steps code {
-  font-family: var(--mono);
-  font-size: 0.85em;
-  color: var(--cyan);
-  background: rgba(34, 211, 238, 0.08);
-  padding: 0.1em 0.4em;
-  border-radius: 6px;
-}
-
-/* ---------- update panel ---------- */
-.update-panel {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
-  gap: 1rem;
-  margin-bottom: 1.4rem;
-}
-
-.update-cell {
-  padding: 1.1rem 1.2rem;
-  border: 1px solid var(--line);
-  border-radius: 14px;
-  background: var(--surface);
-}
-
-.update-cell span {
-  display: block;
-  font-size: 0.74rem;
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--text-faint);
-  margin-bottom: 0.35rem;
-}
-
-.update-cell b {
-  font-family: var(--mono);
-  font-size: 1.12rem;
-  font-weight: 700;
-}
-
-.update-cell b.ok {
-  color: #34d399;
-}
-
-.update-cell b.warn {
-  color: var(--amber);
-}
-
-.update-cell b.err {
-  color: #fb7185;
-}
-
-.update-actions {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 0.8rem;
-  align-items: center;
-}
-
-.update-note {
-  color: var(--text-dim);
-  font-size: 0.9rem;
 }
 
 /* ---------- update banner ---------- */

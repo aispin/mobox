@@ -27,7 +27,6 @@ const ZH = {
   'nav.demos': '三端演示',
   'nav.web3d': 'Web3D',
   'nav.install': '安装',
-  'nav.update': '版本更新',
   'nav.lang': '中',
   'nav.theme': '切换明暗主题',
 
@@ -46,21 +45,16 @@ const ZH = {
   'features.kicker': 'Why MOBOX 2.0',
   'features.title1': '全新架构，',
   'features.title2': '为现代 Web 而生',
-  'features.sub':
-    '告别 gulp + less + bower。全新架构：TypeScript 7、Vite 8、pnpm workspace，以及一整套 Web3D 视觉。',
+  'features.sub': '全新架构：TypeScript 7、Vite 8、pnpm workspace，以及一整套 Web3D 视觉。',
   'features.f1.title': '零依赖核心',
   'features.f1.desc':
-    '@mobox/core 运行时零依赖，gzip 约 4KB。无 Modernizr、无 Snap.svg、无 jQuery。',
+    '@aifire/mobox-core 运行时零依赖，gzip 约 4KB。无 Modernizr、无 Snap.svg、无 jQuery。',
   'features.f2.title': '效果即组件',
   'features.f2.desc': '每种弹窗效果是独立模块，WAAPI 驱动。注册自定义效果只需实现两个方法。',
   'features.f3.title': '三端同源',
   'features.f3.desc': 'core / react / vue 共享同一引擎与效果系统，行为完全一致。',
   'features.f4.title': '现代可访问性',
   'features.f4.desc': '焦点圈禁、ESC 关闭、滚动锁定、inert 隔离、prefers-reduced-motion 全支持。',
-  'features.f5.title': 'PWA 就绪',
-  'features.f5.desc': '可安装、离线可用；版本发现，一键更新。',
-  'features.f6.title': 'Monorepo 工程化',
-  'features.f6.desc': 'pnpm workspace + catalog 版本收敛，Vite 8 库模式双格式产物。',
 
   'effects.kicker': 'Effects as Components',
   'effects.title1': '每种效果，都是一个',
@@ -105,21 +99,22 @@ const ZH = {
   'demos.tab.vanilla': '无框架 core',
   'demos.tab.react': 'React',
   'demos.tab.vue': 'Vue',
-  'demos.vanilla.desc': '命令式 API：Mobox.create() + show(data)。模板即结构，效果通过 data-effect 指定。',
+  'demos.vanilla.desc':
+    '命令式 API：不传 tpl 时自动使用内置基础模板（title + content + 关闭按钮），也可传自定义模板。',
   'demos.vanilla.btn': '用 core 打开弹窗',
   'demos.vanilla.dialogTitle': '无框架依赖版',
   'demos.vanilla.dialogP':
-    '这个弹窗由 <b>@mobox/core</b> 直接用模板字符串创建，没有任何框架参与。数据通过 show(data) 绑定到 .mobox-title 等节点。',
+    '这个弹窗由 <b>@aifire/mobox-core</b> 创建——没有传 tpl，用的是内置基础模板；内容通过 show(data) 绑定到 .mobox-title 等节点。需要按钮或自定义结构时，传自己的 tpl 即可。',
   'demos.react.desc': '受控组件 + forwardRef 命令式句柄。Portal 挂载到 body，open 变化自动同步开关。',
   'demos.react.btn': '用 React 组件打开',
   'demos.react.dialogTitle': 'React 19 适配版',
   'demos.react.dialogP':
-    '这是来自 <b>@mobox/react</b> 的 &lt;Mobox&gt; 组件，内部复用同一份 @mobox/core 引擎。',
-  'demos.vue.desc': 'Vue 3 适配组件，v-model:open 双向绑定，Teleport 到 body，内部同样复用 @mobox/core。',
+    '这是来自 <b>@aifire/mobox-react</b> 的 &lt;Mobox&gt; 组件，内部复用同一份 @aifire/mobox-core 引擎。',
+  'demos.vue.desc': 'Vue 3 适配组件，v-model:open 双向绑定，Teleport 到 body，内部同样复用 @aifire/mobox-core。',
   'demos.vue.btn': '用 Vue 组件打开',
   'demos.vue.dialogTitle': 'Vue 3.5 适配版',
   'demos.vue.dialogP':
-    '这个弹窗由 <b>@mobox/vue</b> 渲染——你现在看到的整个页面是 React 应用，这里是一个 Vue Island。',
+    '这个弹窗由 <b>@aifire/mobox-vue</b> 渲染——你现在看到的整个页面是 React 应用，这里是一个 Vue Island。',
 
   'playground.kicker': 'Web3D Playground',
   'playground.title1': 'Canvas 2D ·',
@@ -128,7 +123,7 @@ const ZH = {
     'Hero 背景由 Three.js + 自定义 GLSL Shader（域扭曲星云 + SDF 盒阵光线步进）渲染；这里是一个零依赖的 Canvas 2D 粒子星座，移动鼠标试试。这片粒子场与弹窗引擎同链协作：<b>点击任意星节点，Mobox 弹窗随即点亮</b>——引擎不关心触发源，一次 click 足矣。',
   'playground.dialogTitle': '星节点 #{id}',
   'playground.dialogP':
-    '你点击了坐标 ({x}, {y}) 的粒子。这个弹窗由 <b>@mobox/core</b> 渲染——渲染层与弹窗引擎完全解耦，任意 DOM 事件都能驱动它。',
+    '你点击了坐标 ({x}, {y}) 的粒子。这个弹窗由 <b>@aifire/mobox-core</b> 渲染——渲染层与弹窗引擎完全解耦，任意 DOM 事件都能驱动它。',
 
   'install.kicker': 'Install',
   'install.title1': '三十秒，',
@@ -137,31 +132,12 @@ const ZH = {
     '核心零依赖，React / Vue 版按需安装。样式表随包发布，<b>只需引入一次</b>，之后所有弹窗自动获得完整样式与主题变量。',
   'install.step1': '安装包',
   'install.step2': '引入样式（仅一次）',
+  'install.step2.note': '两种方式任选其一：直接写进 HTML，或在应用入口 import。之后无需任何额外类名。',
   'install.step3': '打开弹窗',
-  'install.step2.desc':
-    '在应用入口 <c>import &quot;@mobox/core/mobox.css&quot;</c>，或在 HTML 中 <c>&lt;link rel=&quot;stylesheet&quot; href=&quot;.../mobox.css&quot;&gt;</c>。之后无需任何额外类名。',
   'install.step3.desc': '三端用法见上方「三端演示」——core 命令式、React 受控组件、Vue v-model 任选。',
   'install.vue': 'Vue 项目',
   'install.copy': '复制',
   'install.copied': '已复制',
-
-  'update.kicker': 'Version Discovery & Update',
-  'update.title1': '版本发现与更新，',
-  'update.title2': '开箱即用',
-  'update.sub': '发现新版本时，顶部会安静地出现一条提示。一键确认，即刻更新，无需手动找入口。',
-  'update.current': '当前版本',
-  'update.remote': '线上版本',
-  'update.status': '检查状态',
-  'update.lastChecked': '最近检查',
-  'update.idle': '待检查',
-  'update.checking': '检查中…',
-  'update.latest': '已是最新',
-  'update.available': '发现新版本',
-  'update.error': '检查失败',
-  'update.check': '立即检查更新',
-  'update.apply': '热更新并刷新',
-  'update.reload': '刷新页面',
-  'update.latestNote': '当前已是最新版本。',
 
   'banner.available': '发现新版本 v{remote}（当前 v{current}）',
   'banner.swReady': '新版本已就绪，刷新即可生效',
@@ -179,7 +155,6 @@ const EN: Record<MsgKey, string> = {
   'nav.demos': 'Demos',
   'nav.web3d': 'Web3D',
   'nav.install': 'Install',
-  'nav.update': 'Updates',
   'nav.lang': 'EN',
   'nav.theme': 'Toggle light/dark theme',
 
@@ -199,10 +174,10 @@ const EN: Record<MsgKey, string> = {
   'features.title1': 'A brand-new architecture,',
   'features.title2': 'for the modern web',
   'features.sub':
-    'Goodbye gulp + less + bower. A fresh stack: TypeScript 7, Vite 8, pnpm workspace, and a full Web3D visual system.',
+    'A fresh stack: TypeScript 7, Vite 8, pnpm workspace, and a full Web3D visual system.',
   'features.f1.title': 'Zero-dependency core',
   'features.f1.desc':
-    'The @mobox/core runtime ships zero dependencies, ~4KB gzipped. No Modernizr, no Snap.svg, no jQuery.',
+    'The @aifire/mobox-core runtime ships zero dependencies, ~4KB gzipped. No Modernizr, no Snap.svg, no jQuery.',
   'features.f2.title': 'Effects as components',
   'features.f2.desc':
     'Every dialog effect is an independent module driven by WAAPI. Register your own with just two methods.',
@@ -211,11 +186,6 @@ const EN: Record<MsgKey, string> = {
   'features.f4.title': 'Modern accessibility',
   'features.f4.desc':
     'Focus trap, ESC to close, scroll lock, inert isolation, prefers-reduced-motion — all built in.',
-  'features.f5.title': 'PWA ready',
-  'features.f5.desc': 'Installable and offline-capable, with version discovery and one-click updates.',
-  'features.f6.title': 'Monorepo tooling',
-  'features.f6.desc':
-    'pnpm workspace with catalog version pinning; Vite 8 lib mode emits es + umd.',
 
   'effects.kicker': 'Effects as Components',
   'effects.title1': 'Every effect is an',
@@ -262,23 +232,23 @@ const EN: Record<MsgKey, string> = {
   'demos.tab.react': 'React',
   'demos.tab.vue': 'Vue',
   'demos.vanilla.desc':
-    'Imperative API: Mobox.create() + show(data). The template is the structure; the effect is set via data-effect.',
+    'Imperative API: skip tpl to get the built-in basic template (title + content + close button), or pass your own.',
   'demos.vanilla.btn': 'Open with core',
   'demos.vanilla.dialogTitle': 'Framework-free',
   'demos.vanilla.dialogP':
-    'This dialog is created straight from a template string by <b>@mobox/core</b> — no framework involved. Data binds to nodes like .mobox-title via show(data).',
+    'This dialog is created by <b>@aifire/mobox-core</b> — no tpl passed, it uses the built-in basic template; content binds to nodes like .mobox-title via show(data). Need buttons or a custom structure? Pass your own tpl.',
   'demos.react.desc':
     'Controlled component + forwardRef imperative handle. Portals to body; the open state stays in sync.',
   'demos.react.btn': 'Open with React',
   'demos.react.dialogTitle': 'React 19 adapter',
   'demos.react.dialogP':
-    'This is the &lt;Mobox&gt; component from <b>@mobox/react</b>, reusing the very same @mobox/core engine.',
+    'This is the &lt;Mobox&gt; component from <b>@aifire/mobox-react</b>, reusing the very same @aifire/mobox-core engine.',
   'demos.vue.desc':
-    'Vue 3 adapter component with v-model:open two-way binding, teleported to body, reusing @mobox/core under the hood.',
+    'Vue 3 adapter component with v-model:open two-way binding, teleported to body, reusing @aifire/mobox-core under the hood.',
   'demos.vue.btn': 'Open with Vue',
   'demos.vue.dialogTitle': 'Vue 3.5 adapter',
   'demos.vue.dialogP':
-    'This dialog is rendered by <b>@mobox/vue</b> — the whole page you see is a React app, and this is a Vue Island.',
+    'This dialog is rendered by <b>@aifire/mobox-vue</b> — the whole page you see is a React app, and this is a Vue Island.',
 
   'playground.kicker': 'Web3D Playground',
   'playground.title1': 'Canvas 2D ·',
@@ -287,7 +257,7 @@ const EN: Record<MsgKey, string> = {
     'The hero background is rendered with Three.js and a custom GLSL shader (domain-warped nebula + SDF box ray-marching). Below is a zero-dependency Canvas 2D particle constellation — move your mouse around. This field works hand in hand with the dialog engine: <b>click any star node and a Mobox dialog lights up right there</b> — the engine does not care what triggered it, a single click is enough.',
   'playground.dialogTitle': 'Star node #{id}',
   'playground.dialogP':
-    'You clicked the particle at ({x}, {y}). This dialog is rendered by <b>@mobox/core</b> — the render layer and the dialog engine stay fully decoupled; any DOM event can drive it.',
+    'You clicked the particle at ({x}, {y}). This dialog is rendered by <b>@aifire/mobox-core</b> — the render layer and the dialog engine stay fully decoupled; any DOM event can drive it.',
 
   'install.kicker': 'Install',
   'install.title1': 'Thirty seconds,',
@@ -296,33 +266,14 @@ const EN: Record<MsgKey, string> = {
     'The core is zero-dependency; React / Vue adapters install on demand. The stylesheet ships with the package — <b>import it once</b> and every dialog is fully styled.',
   'install.step1': 'Install the package',
   'install.step2': 'Import the CSS (once)',
+  'install.step2.note':
+    'Pick one: write it in your HTML, or import it in your app entry. No extra class names needed afterwards.',
   'install.step3': 'Open a dialog',
-  'install.step2.desc':
-    'In your app entry: <c>import &quot;@mobox/core/mobox.css&quot;</c>, or in HTML: <c>&lt;link rel=&quot;stylesheet&quot; href=&quot;.../mobox.css&quot;&gt;</c>. No extra class names needed afterwards.',
   'install.step3.desc':
     'See the three flavors above — imperative core, controlled React component, or Vue v-model.',
   'install.vue': 'Vue project',
   'install.copy': 'Copy',
   'install.copied': 'Copied',
-
-  'update.kicker': 'Version Discovery & Update',
-  'update.title1': 'Version discovery,',
-  'update.title2': 'built in',
-  'update.sub':
-    'When a new version ships, a quiet banner appears at the top. One click confirms the update — no hunting for the refresh button.',
-  'update.current': 'Current version',
-  'update.remote': 'Live version',
-  'update.status': 'Status',
-  'update.lastChecked': 'Last checked',
-  'update.idle': 'Not checked',
-  'update.checking': 'Checking…',
-  'update.latest': 'Up to date',
-  'update.available': 'New version',
-  'update.error': 'Check failed',
-  'update.check': 'Check for updates',
-  'update.apply': 'Hot update & reload',
-  'update.reload': 'Reload page',
-  'update.latestNote': 'You are on the latest version.',
 
   'banner.available': 'New version v{remote} available (current v{current})',
   'banner.swReady': 'A new version is ready — reload to apply',
@@ -335,17 +286,16 @@ const EN: Record<MsgKey, string> = {
 
 const DICT: Record<Lang, Record<MsgKey, string>> = { zh: ZH, en: EN }
 
-/** Replaces <c>…</c> markers with <code> elements. */
+/** Replaces <c>…</c> markers with <code> elements; both branches decode HTML entities. */
 function renderRich(text: string): ReactNode {
   const nodes: ReactNode[] = []
   const parts = text.split(/(<c>[\s\S]*?<\/c>)/g)
   parts.forEach((part, i) => {
+    if (!part) return
     if (part.startsWith('<c>')) {
-      nodes.push(<code key={i}>{part.slice(3, -4)}</code>)
-    } else if (part) {
-      nodes.push(
-        <span key={i} dangerouslySetInnerHTML={{ __html: part }} />,
-      )
+      nodes.push(<code key={i} dangerouslySetInnerHTML={{ __html: part.slice(3, -4) }} />)
+    } else {
+      nodes.push(<span key={i} dangerouslySetInnerHTML={{ __html: part }} />)
     }
   })
   return <>{nodes}</>

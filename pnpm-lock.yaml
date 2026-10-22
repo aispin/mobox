@@ -223,13 +223,13 @@ importers:
 
   apps/landing:
     dependencies:
-      '@mobox/core':
+      '@aifire/mobox-core':
         specifier: workspace:*
         version: link:../../packages/core
-      '@mobox/react':
+      '@aifire/mobox-react':
         specifier: workspace:*
         version: link:../../packages/react
-      '@mobox/vue':
+      '@aifire/mobox-vue':
         specifier: workspace:*
         version: link:../../packages/vue
       react:
@@ -293,7 +293,7 @@ importers:
 
   packages/react:
     devDependencies:
-      '@mobox/core':
+      '@aifire/mobox-core':
         specifier: workspace:*
         version: link:../core
       '@types/react':
@@ -320,7 +320,7 @@ importers:
 
   packages/vue:
     devDependencies:
-      '@mobox/core':
+      '@aifire/mobox-core':
         specifier: workspace:*
         version: link:../core
       '@vitejs/plugin-vue':

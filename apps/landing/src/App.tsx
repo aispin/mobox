@@ -7,7 +7,6 @@ import { ArchDiagram } from './components/ArchDiagram'
 import { Demos } from './components/Demos'
 import { Constellation } from './components/Constellation'
 import { Install } from './components/Install'
-import { UpdatePanel } from './components/UpdatePanel'
 import { UpdateBanner } from './components/UpdateBanner'
 import { Footer } from './components/Footer'
 import { useUpdate } from './lib/useUpdate'
@@ -52,7 +51,7 @@ function useReveal() {
 }
 
 export default function App() {
-  const { status, remote, lastChecked, error, swReady, check, applyUpdate } = useUpdate()
+  const { status, remote, swReady, applyUpdate } = useUpdate()
   const { theme, toggle } = useTheme()
   useReveal()
 
@@ -71,15 +70,6 @@ export default function App() {
         <Demos />
         <Constellation />
         <Install />
-        <UpdatePanel
-          status={status}
-          remote={remote}
-          lastChecked={lastChecked}
-          error={error}
-          swReady={swReady}
-          onCheck={() => void check()}
-          onApply={applyUpdate}
-        />
       </main>
       <Footer />
     </>

@@ -24,7 +24,11 @@ export interface MoboxOptions {
 export interface MoboxCreateOptions extends MoboxOptions {
   /** Existing element or element id */
   el?: HTMLElement | string
-  /** HTML string, <script> template element or element id */
+  /**
+   * HTML string, <script> template element or element id.
+   * Optional — falls back to a built-in basic template
+   * (title + content + close button); bind content via show({ title, content }).
+   */
   tpl?: HTMLElement | string
   /** Show immediately after creation. Default: true */
   autoShow?: boolean
